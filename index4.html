@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Консультации | София</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --turquoise: #2A9D8F;
+            --turquoise-deep: #1A6B63;
+            --turquoise-glow: #5EEAD4;
+            --pink: #F5C6D6;
+            --pink-soft: #FDEEF4;
+            --pink-glow: #FFD6E5;
+            --beige: #F8F0E8;
+            --beige-warm: #F3E6DC;
+            --text: #2C3338;
+            --text-soft: #5A656D;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            color: var(--text);
+            line-height: 1.75;
+            background: var(--beige-warm);
+            font-weight: 400;
+            font-size: 15.5px;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -15%;
+            right: -10%;
+            width: 55%;
+            height: 65%;
+            background: radial-gradient(circle, rgba(245, 198, 214, 0.28) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(55px);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -20%;
+            left: -10%;
+            width: 60%;
+            height: 70%;
+            background: radial-gradient(circle, rgba(94, 234, 212, 0.14) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(40px);
+        }
+
+        h1, h2, .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+        }
+
+        main {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 5rem 1.4rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about {
+            text-align: center;
+            margin-bottom: 3.2rem;
+        }
+
+        .about h1 {
+            font-size: 2.1rem;
+            color: var(--turquoise-deep);
+            margin-bottom: 1.4rem;
+            letter-spacing: 0.3px;
+        }
+
+        .about p {
+            font-size: 1rem;
+            color: var(--text);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* Quote */
+        .quote-section {
+            margin: 3.5rem 0 3.8rem;
+        }
+
+        .quote-box {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(8px);
+            border-left: 3px solid var(--turquoise-glow);
+            padding: 2.2rem 1.8rem;
+            border-radius: 0 14px 14px 0;
+            box-shadow: 
+                0 10px 40px rgba(42, 157, 143, 0.08),
+                0 0 60px rgba(94, 234, 212, 0.12);
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '“';
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            color: var(--turquoise-glow);
+            opacity: 0.3;
+            position: absolute;
+            top: -0.8rem;
+            left: 1rem;
+            line-height: 1;
+        }
+
+        .quote-text {
+            font-size: 1.32rem;
+            color: var(--text);
+            line-height: 1.55;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-label {
+            margin-top: 1.2rem;
+            font-size: 0.82rem;
+            color: var(--turquoise);
+            letter-spacing: 0.8px;
+            font-weight: 400;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        /* Formats */
+        .formats {
+            margin: 3.5rem 0 2.5rem;
+            text-align: center;
+        }
+
+        .formats h2 {
+            font-size: 1.85rem;
+            color: var(--turquoise-deep);
+            margin-bottom: 1.8rem;
+        }
+
+        .format-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2.2rem;
+        }
+
+        .format-card {
+            background: white;
+            border: 1.5px solid rgba(42, 157, 143, 0.18);
+            border-radius: 14px;
+            padding: 1.5rem 1.4rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .format-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            box-shadow: 0 0 0 0 rgba(94, 234, 212, 0);
+            transition: box-shadow 0.3s ease;
+            pointer-events: none;
+        }
+
+        .format-card:hover {
+            border-color: var(--turquoise-glow);
+            transform: translateY(-2px);
+        }
+
+        .format-card.selected {
+            border-color: var(--turquoise-glow);
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf9 100%);
+            box-shadow: 
+                0 0 0 1px rgba(94, 234, 212, 0.4),
+                0 10px 40px rgba(42, 157, 143, 0.18),
+                0 0 50px rgba(94, 234, 212, 0.35);
+        }
+
+        .format-card.selected::after {
+            box-shadow: inset 0 0 20px rgba(94, 234, 212, 0.15);
+        }
+
+        .format-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            color: var(--turquoise-deep);
+            margin-bottom: 0.3rem;
+        }
+
+        .format-card .price {
+            font-size: 1.05rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .format-card .duration {
+            color: var(--text-soft);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--turquoise) 0%, var(--turquoise-deep) 100%);
+            color: white;
+            padding: 0.95rem 2.6rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.98rem;
+            letter-spacing: 0.4px;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 8px 25px rgba(42, 157, 143, 0.3),
+                0 0 30px rgba(94, 234, 212, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 12px 35px rgba(42, 157, 143, 0.4),
+                0 0 40px rgba(94, 234, 212, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .cta-bottom {
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .love-phrase {
+            text-align: center;
+            margin-top: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.45rem;
+            color: var(--turquoise-deep);
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+            text-shadow: 0 0 20px rgba(94, 234, 212, 0.25);
+        }
+
+        .note {
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem 1.4rem 2rem;
+            color: var(--text-soft);
+            font-size: 0.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer a {
+            color: var(--turquoise);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            main {
+                padding: 4rem 1.2rem 3rem;
+            }
+
+            .about h1 {
+                font-size: 1.85rem;
+            }
+
+            .quote-text {
+                font-size: 1.2rem;
+            }
+
+            body {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="about">
+            <h1>Обо мне</h1>
+            <p>Меня зовут София. Я создаю бережное пространство, где можно остановиться, прислушаться к себе и говорить о самом важном без осуждения. Моя задача — не давать готовых ответов, а помочь яснее увидеть свои чувства и услышать собственный голос.</p>
+        </section>
+
+        <section class="quote-section">
+            <div class="quote-box">
+                <p class="quote-text">Близнецовое пламя — это не про поиск единственно правильного ответа. Это путь глубокого узнавания себя через связь с другим, где важно сохранить контакт с собой и выбирать любовь, не теряя собственной опоры.</p>
+                <div class="quote-label">одно сознание на двоих, зеркальная реальность</div>
+            </div>
+        </section>
+
+        <section class="formats">
+            <h2>Консультации</h2>
+            <div class="format-cards">
+                <div class="format-card" data-minutes="60" data-price="2000">
+                    <h3>Глубокая встреча</h3>
+                    <div class="price">2 000 ₽</div>
+                    <div class="duration">60 минут</div>
+                </div>
+                <div class="format-card" data-minutes="30" data-price="1000">
+                    <h3>Небольшой разбор</h3>
+                    <div class="price">1 000 ₽</div>
+                    <div class="duration">30 минут</div>
+                </div>
+            </div>
+
+            <div class="cta-bottom">
+                <a href="https://t.me/Sofyushka_B" target="_blank" class="btn" id="bookBtn">Записаться</a>
+            </div>
+
+            <p class="love-phrase">Выбери любовь.<br>Соединись с сердцем</p>
+        </section>
+    </main>
+
+    <footer>
+        <p><a href="https://t.me/Sofyushka_B" target="_blank">Telegram @Sofyushka_B</a></p>
+    </footer>
+
+    <script>
+        const cards = document.querySelectorAll('.format-card');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                cards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>
